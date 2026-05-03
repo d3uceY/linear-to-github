@@ -12,9 +12,9 @@
     "dev": "bun run src/index.ts",
     "test": "bun test",
     "lint": "tsc --noEmit",
-    "compile:win": "bun build --compile --target=bun-windows-x64 ./src/index.ts --outfile=bin/linear-to-github-win.exe",
-    "compile:linux": "bun build --compile --target=bun-linux-x64 ./src/index.ts --outfile=bin/linear-to-github-linux",
-    "compile:mac": "bun build --compile --target=bun-darwin-arm64 ./src/index.ts --outfile=bin/linear-to-github-macos",
+    "compile:win": "bun build --compile --minify --production --bytecode --target=bun-windows-x64 ./src/index.ts --outfile=bin/linear-to-github-win.exe",
+    "compile:linux": "bun build --compile --minify --production --bytecode --target=bun-linux-x64 ./src/index.ts --outfile=bin/linear-to-github-linux",
+    "compile:mac": "bun build --compile --minify --production --bytecode --target=bun-darwin-arm64 ./src/index.ts --outfile=bin/linear-to-github-macos",
     "compile:all": "bun run compile:win ; bun run compile:linux ; bun run compile:mac"
   },
   "repository": {
