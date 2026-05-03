@@ -1,6 +1,6 @@
-export namespace main {
+export namespace transfer {
 	
-	export class TransferOptions {
+	export class Options {
 	    linearApiKey: string;
 	    githubToken: string;
 	    githubOwner: string;
@@ -9,7 +9,7 @@ export namespace main {
 	    delayMs: number;
 	
 	    static createFrom(source: any = {}) {
-	        return new TransferOptions(source);
+	        return new Options(source);
 	    }
 	
 	    constructor(source: any = {}) {
