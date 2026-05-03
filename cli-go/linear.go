@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-// LinearIssue holds the fields we care about from a Linear issue.
+
 type LinearIssue struct {
 	ID          string
 	Title       string
@@ -20,7 +20,7 @@ type LinearIssue struct {
 
 type gqlRequest struct {
 	Query     string                 `json:"query"`
-	Variables map[string]any{} `json:"variables,omitempty"`
+	Variables map[string]any `json:"variables,omitempty"`
 }
 
 type gqlResponse struct {
@@ -70,12 +70,12 @@ query Issues($filter: IssueFilter) {
 }`
 
 func fetchLinearIssues(apiKey, teamID string) ([]LinearIssue, error) {
-	var variables map[string]any{}
+	var variables map[string]any
 	if teamID != "" {
-		variables = map[string]any{}{
-			"filter": map[string]any{}{
-				"team": map[string]any{}{
-					"id": map[string]any{}{
+		variables = map[string]any{
+			"filter": map[string]any{
+				"team": map[string]any{
+					"id": map[string]any{
 						"eq": teamID,
 					},
 				},

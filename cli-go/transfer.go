@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// TransferOptions holds all configuration for a transfer run.
 type TransferOptions struct {
 	LinearAPIKey string
 	GitHubToken  string
@@ -16,19 +15,18 @@ type TransferOptions struct {
 	DelayMs      int
 }
 
-// TransferResult pairs a Linear issue with the GitHub issue it became.
+
 type TransferResult struct {
 	LinearIssue LinearIssue
 	GitHubIssue GitHubIssue
 }
 
-// TransferError records a failed issue and the reason.
+
 type TransferError struct {
 	Issue LinearIssue
 	Err   string
 }
 
-// TransferSummary is the final report of a transfer run.
 type TransferSummary struct {
 	Total       int
 	Transferred int
