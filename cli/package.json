@@ -10,7 +10,6 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "bun run src/index.ts",
-    "test": "bun test",
     "lint": "tsc --noEmit",
     "compile:win": "bun build --compile --minify --production --bytecode --target=bun-windows-x64 ./src/index.ts --outfile=bin/linear-to-github-win.exe",
     "compile:linux": "bun build --compile --minify --production --bytecode --target=bun-linux-x64 ./src/index.ts --outfile=bin/linear-to-github-linux",
@@ -29,26 +28,13 @@
     "url": "https://github.com/bazylhorsey/linear-to-github/issues"
   },
   "homepage": "https://github.com/bazylhorsey/linear-to-github#readme",
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "testMatch": ["**/__tests__/**/*.test.ts"],
-    "moduleNameMapper": {
-      "^@octokit/(.*)$": "<rootDir>/src/__mocks__/@octokit/$1.js"
-    }
-  },
   "dependencies": {
     "@linear/sdk": "^76.0.0",
     "@octokit/rest": "^22.0.1",
-    "commander": "^14.0.3",
-    "dotenv": "^17.3.1"
+    "commander": "^14.0.3"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@types/node": "^25.3.2",
-    "jest": "^30.2.0",
-    "ts-jest": "^29.4.6",
-    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
 }
