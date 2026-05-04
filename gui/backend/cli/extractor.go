@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"crypto/sha256"
 	"embed"
 	"fmt"
 	"os"
@@ -34,8 +35,10 @@ func Extract(fs embed.FS) (*Extractor, error) {
 		return nil, fmt.Errorf("read embedded CLI (%s): %w", name, err)
 	}
 
-	tmpDir, err := os.MkdirTemp("", "ltg-*")
-	if err != nil {
+	hash := fmt.Sprintf("%x", sha256.Sum256(data))
+	tmpDir := filepath.Join(os.TempDir(), "ltg-"+hash[:16])
+
+	if err := os.MkdirAll(tmpDir, 0700); err != nil {
 		return nil, fmt.Errorf("create temp dir: %w", err)
 	}
 
@@ -45,9 +48,11 @@ func Extract(fs embed.FS) (*Extractor, error) {
 	}
 	cliPath := filepath.Join(tmpDir, "linear-to-github"+ext)
 
-	if err := os.WriteFile(cliPath, data, 0755); err != nil {
-		os.RemoveAll(tmpDir)
-		return nil, fmt.Errorf("write CLI binary: %w", err)
+	if _, err := os.Stat(cliPath); os.IsNotExist(err) {
+		if err := os.WriteFile(cliPath, data, 0755); err != nil {
+			os.RemoveAll(tmpDir)
+			return nil, fmt.Errorf("write CLI binary: %w", err)
+		}
 	}
 
 	return &Extractor{tmpDir: tmpDir, CLIPath: cliPath}, nil
